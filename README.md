@@ -269,17 +269,15 @@ For production, set `SEED_DUMMY_DATA=false` and use `--force`:
 php artisan db:seed-essential --fresh --force
 ```
 
-## Docker and Laravel Sail
-This project is configured with [Laravel Sail](https://laravel.com/docs/sail). You can use all the docker functionalities here. To install using docker and sail:
+## Docker for local development
+This project now includes a Docker Compose setup for local development with PHP 8.4, MySQL, Vite, and Adminer.
 
-1. Clone or download the repository
-2. Go to the project directory and run `composer install`
-3. Create `.env` file by copying the `.env-sail`. You may use the command to do that `cp .env-sail .env`
-4. Update the database name and credentials in `.env` file
-5. Run the command `sail up` (consider adding this to your alias: `alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'`)
-6. Run the command `sail artisan migrate --seed`
-7. Link storage directory: `sail artisan storage:link`
-8. Since Sail is already up, you can just visit http://localhost:80
+1. Clone or download the repository.
+2. Copy the example environment file if needed: `cp .env.example .env`.
+3. Build and start the stack: `docker compose up --build`.
+4. The application will be available at http://localhost:8000, Vite at http://localhost:5173, and Adminer at http://localhost:8080.
+5. Run the initial setup inside the container if needed: `docker compose exec app php artisan migrate --seed`.
+6. Link the storage directory if required: `docker compose exec app php artisan storage:link`.
 
 
 # Reporting a Vulnerability
